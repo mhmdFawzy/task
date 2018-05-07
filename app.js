@@ -80,7 +80,7 @@ function removeTask(e) {
         e.target.parentElement.parentElement.remove();
   
         // Remove from LS
-        removeTaskFromLocalStorage(e.target.parentElement.parentElement);
+        removeLS(e.target.parentElement.parentElement);
       }
     }
   }

@@ -57,28 +57,34 @@ function addTask(e) {
     // prevent default event from happeinig which here is submit
     e.preventDefault();
 }
-
+store in local storage function
 function storeTaskInLocalStorage(task) {
     tasks.push(task);
     localStorage.setItem('tasks', JSON.stringify(tasks));
 }
-
-function removeLS(taskContent){
-    tasks.forEach(function(task,index){
-        if(taskContent.textContent === task+'Delete '){
-            tasks.splice(index,1);
+// remove from local storage function
+function removeLS(taskContent) {
+    tasks.forEach(function (task, index) {
+        if (taskContent.textContent === task + 'Delete ') {
+            tasks.splice(index, 1);
             console.log('yesh');
         }
     });
-    localStorage.setItem('tasks',JSON.stringify(tasks));
+    localStorage.setItem('tasks', JSON.stringify(tasks));
 }
 
+// Remove Task
 function removeTask(e) {
-    (e.target.classList.contains('delete-item')) ? (confirm('Are you sure you want to remove a task'), e.target.parentElement.remove()) : console.log(" ");
-    removeLS(e.target.parentElement);
-
-}
-
+    if(e.target.parentElement.classList.contains('delete-item')) {
+      if(confirm('Are You Sure?')) {
+        e.target.parentElement.parentElement.remove();
+  
+        // Remove from LS
+        removeTaskFromLocalStorage(e.target.parentElement.parentElement);
+      }
+    }
+  }
+// clear all tasks function
 function removeAllTasks(e) {
     while (allTasks.firstElementChild) {
         allTasks.removeChild(allTasks.firstElementChild);
@@ -87,7 +93,7 @@ function removeAllTasks(e) {
     tasks = [];
 
 }
-
+// filter the tasks function
 function filterAllTasks(e) {
     const text = e.target.value.toLowerCase();
     document.querySelectorAll('.single-task').forEach(

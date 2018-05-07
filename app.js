@@ -57,7 +57,7 @@ function addTask(e) {
     // prevent default event from happeinig which here is submit
     e.preventDefault();
 }
-store in local storage function
+// store in local storage function
 function storeTaskInLocalStorage(task) {
     tasks.push(task);
     localStorage.setItem('tasks', JSON.stringify(tasks));
